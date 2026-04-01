@@ -806,8 +806,17 @@ export default function App() {
       });
   })();
 
+  const selectedTrendEntry = selectedTrendMonth ? calendarMonths.find(m => m.year_month === selectedTrendMonth) : null;
+  const displayOccRate = selectedTrendEntry
+    ? Math.round(selectedTrendEntry.booked / selectedTrendEntry.daysInMonth * 100)
+    : overview.occupancyRate || 0;
+  const displayBookedNights = selectedTrendEntry ? selectedTrendEntry.booked : bookedNights;
+  const displayTotalNights = selectedTrendEntry ? selectedTrendEntry.daysInMonth : totalNights;
+  const displayAvailableNights = selectedTrendEntry ? selectedTrendEntry.available : availableNights;
+  const displayBlockedCount = selectedTrendEntry ? selectedTrendEntry.blocked : blockedCount;
+
   const statCards = [
-    { label: "Occupancy Rate", value: `${overview.occupancyRate || 0}%`, sub: `${bookedNights}/${totalNights} nights`, mkt: `Mkt avg ${marketAvg.occupancy}%`, color: C.accent, vs: +((overview.occupancyRate || 0) - marketAvg.occupancy).toFixed(1) },
+    { label: "Occupancy Rate", value: `${displayOccRate}%`, sub: `${displayBookedNights}/${displayTotalNights} nights${selectedTrendEntry ? ` · ${selectedTrendEntry.month}` : ""}`, mkt: `Mkt avg ${marketAvg.occupancy}%`, color: C.accent, vs: +(displayOccRate - marketAvg.occupancy).toFixed(1) },
     { label: "Monthly Revenue", value: `$${(overview.totalRevenue || 0).toLocaleString()}`, sub: overview.projectedRevenue ? `$${overview.projectedRevenue.toLocaleString()} projected` : "", mkt: null, color: C.teal, vs: null },
     { label: "Avg Nightly Rate", value: `$${yourNightlyRate}`, sub: "per night", mkt: `Mkt avg $${marketAvg.rate}`, color: C.green, vs: +(yourNightlyRate - marketAvg.rate).toFixed(1) },
     { label: "Guest Rating", value: `${overview.rating || 0}★`, sub: `${overview.totalReviews || 0} reviews`, mkt: `Mkt avg ${marketAvg.rating}★`, color: C.purple, vs: +((overview.rating || 0) - marketAvg.rating).toFixed(2) },
@@ -1011,15 +1020,17 @@ export default function App() {
 
                 <div style={{ background: C.card, border: `1px solid ${C.cardBorder}`, borderRadius: 14, padding: 24 }}>
                   <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 700, marginBottom: 4 }}>Occupancy</h3>
-                  <p style={{ color: C.muted, fontSize: 12, marginBottom: 16 }}>This month at a glance</p>
+                  <p style={{ color: selectedTrendEntry ? C.accent : C.muted, fontSize: 12, marginBottom: 16 }}>
+                    {selectedTrendEntry ? `${selectedTrendEntry.month} at a glance` : "This month at a glance"}
+                  </p>
                   <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
-                    <RadialGauge value={overview.occupancyRate || 0} color={C.accent} size={110} />
+                    <RadialGauge value={displayOccRate} color={C.accent} size={110} />
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                     {[
-                      { label: "Booked", value: bookedNights, color: C.accent },
-                      { label: "Available", value: availableNights, color: C.green },
-                      { label: "Blocked", value: blockedCount, color: C.rose },
+                      { label: "Booked", value: displayBookedNights, color: C.accent },
+                      { label: "Available", value: displayAvailableNights, color: C.green },
+                      { label: "Blocked", value: displayBlockedCount, color: C.rose },
                       { label: "Response", value: overview.responseRate ? `${overview.responseRate}%` : "N/A", color: C.teal },
                     ].map((s, i) => (
                       <div key={i} style={{ background: C.bg, borderRadius: 8, padding: "8px 10px" }}>
