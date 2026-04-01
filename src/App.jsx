@@ -817,7 +817,7 @@ export default function App() {
 
   const statCards = [
     { label: "Occupancy Rate", value: `${displayOccRate}%`, sub: `${displayBookedNights}/${displayTotalNights} nights${selectedTrendEntry ? ` · ${selectedTrendEntry.month}` : ""}`, mkt: `Mkt avg ${marketAvg.occupancy}%`, color: C.accent, vs: +(displayOccRate - marketAvg.occupancy).toFixed(1) },
-    { label: "Monthly Revenue", value: `$${(overview.totalRevenue || 0).toLocaleString()}`, sub: overview.projectedRevenue ? `$${overview.projectedRevenue.toLocaleString()} projected` : "", mkt: null, color: C.teal, vs: null },
+    { label: "Monthly Revenue", value: `$${selectedTrendEntry ? Math.round(selectedTrendEntry.revenue).toLocaleString() : (overview.totalRevenue || 0).toLocaleString()}`, sub: selectedTrendEntry ? selectedTrendEntry.month : (overview.projectedRevenue ? `$${overview.projectedRevenue.toLocaleString()} projected` : ""), mkt: null, color: C.teal, vs: null },
     { label: "Avg Nightly Rate", value: `$${yourNightlyRate}`, sub: "per night", mkt: `Mkt avg $${marketAvg.rate}`, color: C.green, vs: +(yourNightlyRate - marketAvg.rate).toFixed(1) },
     { label: "Guest Rating", value: `${overview.rating || 0}★`, sub: `${overview.totalReviews || 0} reviews`, mkt: `Mkt avg ${marketAvg.rating}★`, color: C.purple, vs: +((overview.rating || 0) - marketAvg.rating).toFixed(2) },
   ];
