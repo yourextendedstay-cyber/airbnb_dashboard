@@ -648,6 +648,8 @@ export default function App() {
   const [tab, setTab] = useState("Overview");
   const [showAI, setShowAI] = useState(false);
   const [activeRec, setActiveRec] = useState(null);
+  const [compSort, setCompSort] = useState({ key: "reviews", dir: "desc" });
+  const [selectedTrendMonth, setSelectedTrendMonth] = useState(null);
 
   // ─── Live data state ───
   const [overview, setOverview] = useState(null);
@@ -796,6 +798,8 @@ export default function App() {
           booked: data.booked.size,
           blocked: data.blocked.size,
           available: daysInMonth - data.booked.size - data.blocked.size,
+          bookedDays: [...data.booked],
+          blockedDays: [...data.blocked],
           daysInMonth,
           revenue: Math.round(data.revenue * 100) / 100,
         };
@@ -907,18 +911,36 @@ export default function App() {
                           const maxDays = Math.max(...calendarMonths.map(m => m.daysInMonth));
                           const bookedPct = (d.booked / maxDays) * 100;
                           const blockedPct = (d.blocked / maxDays) * 100;
-                          const totalPct = bookedPct + blockedPct;
+                          const availablePct = (d.available / maxDays) * 100;
                           const isCurrentMonth = d.year_month === new Date().toISOString().slice(0, 7);
+                          const isSelected = d.year_month === selectedTrendMonth;
                           return (
-                            <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4, height: "100%" }}>
+                            <div
+                              key={i}
+                              onClick={() => setSelectedTrendMonth(isSelected ? null : d.year_month)}
+                              style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4, height: "100%", cursor: "pointer" }}
+                            >
                               {/* Revenue label on top */}
                               <span style={{ fontSize: 9, color: C.teal, fontFamily: "'DM Mono', monospace", fontWeight: 600, whiteSpace: "nowrap" }}>
                                 ${d.revenue >= 1000 ? `${(d.revenue / 1000).toFixed(1)}k` : Math.round(d.revenue)}
                               </span>
                               {/* Stacked bar */}
                               <div style={{ flex: 1, width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-                                <div style={{ width: "100%", borderRadius: "4px 4px 0 0", overflow: "hidden" }}>
-                                  {/* Blocked segment (red) — on top */}
+                                <div style={{
+                                  width: "100%", borderRadius: "4px 4px 0 0", overflow: "hidden",
+                                  outline: isSelected ? `2px solid ${C.accent}` : "none",
+                                  outlineOffset: 2,
+                                }}>
+                                  {/* Available segment (green) — top */}
+                                  {d.available > 0 && (
+                                    <div style={{
+                                      width: "100%",
+                                      height: Math.max(2, availablePct * 1.1),
+                                      background: C.green,
+                                      opacity: 0.45,
+                                    }} />
+                                  )}
+                                  {/* Blocked segment (red) — middle */}
                                   {d.blocked > 0 && (
                                     <div style={{
                                       width: "100%",
@@ -941,7 +963,7 @@ export default function App() {
                                 </div>
                               </div>
                               {/* Month label */}
-                              <span style={{ fontSize: 10, color: isCurrentMonth ? C.accent : C.muted, fontFamily: "'DM Mono', monospace", fontWeight: isCurrentMonth ? 700 : 400 }}>{d.month}</span>
+                              <span style={{ fontSize: 10, color: isSelected ? C.accent : isCurrentMonth ? C.accent : C.muted, fontFamily: "'DM Mono', monospace", fontWeight: isSelected || isCurrentMonth ? 700 : 400 }}>{d.month}</span>
                             </div>
                           );
                         })}
@@ -950,11 +972,15 @@ export default function App() {
                       <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                           <div style={{ width: 10, height: 10, borderRadius: 2, background: C.accent }} />
-                          <span style={{ fontSize: 11, color: C.muted }}>Booked nights</span>
+                          <span style={{ fontSize: 11, color: C.muted }}>Booked</span>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                           <div style={{ width: 10, height: 10, borderRadius: 2, background: C.rose, opacity: 0.7 }} />
-                          <span style={{ fontSize: 11, color: C.muted }}>Blocked nights</span>
+                          <span style={{ fontSize: 11, color: C.muted }}>Blocked</span>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                          <div style={{ width: 10, height: 10, borderRadius: 2, background: C.green, opacity: 0.6 }} />
+                          <span style={{ fontSize: 11, color: C.muted }}>Available</span>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                           <div style={{ width: 10, height: 10, borderRadius: 2, background: C.teal }} />
@@ -966,9 +992,15 @@ export default function App() {
                         <span style={{ fontSize: 11, color: C.muted }}>
                           Total: <span style={{ color: C.accent, fontWeight: 600 }}>{calendarMonths.reduce((s, m) => s + m.booked, 0)} booked</span>
                           {" · "}<span style={{ color: C.rose, fontWeight: 600 }}>{calendarMonths.reduce((s, m) => s + m.blocked, 0)} blocked</span>
+                          {" · "}<span style={{ color: C.green, fontWeight: 600 }}>{calendarMonths.reduce((s, m) => s + m.available, 0)} open</span>
                           {" · "}<span style={{ color: C.teal, fontWeight: 600 }}>${calendarMonths.reduce((s, m) => s + m.revenue, 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</span>
                         </span>
                       </div>
+                      {selectedTrendMonth && (
+                        <p style={{ fontSize: 11, color: C.accent, marginTop: 6, fontStyle: "italic" }}>
+                          Showing calendar for {calendarMonths.find(m => m.year_month === selectedTrendMonth)?.month} — click bar again to reset
+                        </p>
+                      )}
                     </>
                   ) : (
                     <div style={{ height: 120, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -1001,30 +1033,43 @@ export default function App() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 <div style={{ background: C.card, border: `1px solid ${C.cardBorder}`, borderRadius: 14, padding: 24 }}>
-                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 700, marginBottom: 4 }}>Availability Calendar</h3>
-                  <p style={{ color: C.muted, fontSize: 12, marginBottom: 16 }}>{calendarMonth}</p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                    {Array.from({ length: totalNights }, (_, i) => i + 1).map(d => {
-                      const status = calendarBooked.includes(d) ? "booked" : calendarBlocked.includes(d) ? "blocked" : "open";
-                      const colors = { booked: C.accent, blocked: C.rose, open: C.cardBorder };
-                      return (
-                        <div key={d} style={{
-                          width: 26, height: 26, borderRadius: 6, background: colors[status],
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          fontSize: 10, color: status === "booked" ? "#000" : C.muted,
-                          fontFamily: "'DM Mono', monospace", fontWeight: 600, opacity: status === "open" ? 0.4 : 1,
-                        }}>{d}</div>
-                      );
-                    })}
-                  </div>
-                  <div style={{ display: "flex", gap: 14, marginTop: 10 }}>
-                    {[["booked", C.accent, "Booked"], ["blocked", C.rose, "Blocked"], ["open", C.cardBorder, "Open"]].map(([k, c, l]) => (
-                      <div key={k} style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                        <div style={{ width: 10, height: 10, borderRadius: 2, background: c }} />
-                        <span style={{ fontSize: 11, color: C.muted }}>{l}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {(() => {
+                    const selectedEntry = selectedTrendMonth ? calendarMonths.find(m => m.year_month === selectedTrendMonth) : null;
+                    const displayBooked = selectedEntry ? selectedEntry.bookedDays : calendarBooked;
+                    const displayBlocked = selectedEntry ? selectedEntry.blockedDays : calendarBlocked;
+                    const displayTotalDays = selectedEntry ? selectedEntry.daysInMonth : totalNights;
+                    const displayLabel = selectedEntry
+                      ? new Date(selectedEntry.year_month + "-02").toLocaleString("default", { month: "long", year: "numeric" })
+                      : calendarMonth;
+                    return (
+                      <>
+                        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 700, marginBottom: 4 }}>Availability Calendar</h3>
+                        <p style={{ color: selectedEntry ? C.accent : C.muted, fontSize: 12, marginBottom: 16 }}>{displayLabel}</p>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                          {Array.from({ length: displayTotalDays }, (_, i) => i + 1).map(d => {
+                            const status = displayBooked.includes(d) ? "booked" : displayBlocked.includes(d) ? "blocked" : "open";
+                            const colors = { booked: C.accent, blocked: C.rose, open: C.cardBorder };
+                            return (
+                              <div key={d} style={{
+                                width: 26, height: 26, borderRadius: 6, background: colors[status],
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                fontSize: 10, color: status === "booked" ? "#000" : C.muted,
+                                fontFamily: "'DM Mono', monospace", fontWeight: 600, opacity: status === "open" ? 0.4 : 1,
+                              }}>{d}</div>
+                            );
+                          })}
+                        </div>
+                        <div style={{ display: "flex", gap: 14, marginTop: 10 }}>
+                          {[["booked", C.accent, "Booked"], ["blocked", C.rose, "Blocked"], ["open", C.cardBorder, "Open"]].map(([k, c, l]) => (
+                            <div key={k} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                              <div style={{ width: 10, height: 10, borderRadius: 2, background: c }} />
+                              <span style={{ fontSize: 11, color: C.muted }}>{l}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 <div style={{ background: C.card, border: `1px solid ${C.cardBorder}`, borderRadius: 14, padding: 24 }}>
@@ -1090,17 +1135,56 @@ export default function App() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
                   <div>
                     <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 700 }}>Nearby Competitors</h3>
-                    <p style={{ color: C.muted, fontSize: 12, marginTop: 3 }}>{competitors.length} properties — ranked by reviews</p>
+                    <p style={{ color: C.muted, fontSize: 12, marginTop: 3 }}>{competitors.length} properties — click column headers to sort</p>
                   </div>
                   <span style={{ fontSize: 11, background: C.tealSoft, color: C.teal, border: `1px solid ${C.teal}44`, borderRadius: 20, padding: "4px 12px" }}>Live Market Data</span>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1.8fr 0.5fr 0.8fr 0.8fr 0.8fr 0.8fr 1.4fr", gap: 12, padding: "0 16px 10px", borderBottom: `1px solid ${C.cardBorder}`, marginBottom: 8 }}>
-                  {["Property", "Beds", "Occupancy", "Rate/Night", "Rating", "Reviews", "Competitive Edge"].map(h => (
-                    <span key={h} style={{ fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: 1 }}>{h}</span>
+                  {[
+                    { label: "Property", key: null },
+                    { label: "Beds", key: "bedrooms" },
+                    { label: "Occupancy", key: "occupancy" },
+                    { label: "Rate/Night", key: "rate" },
+                    { label: "Rating", key: "rating" },
+                    { label: "Reviews", key: "reviews" },
+                    { label: "Competitive Edge", key: null },
+                  ].map(h => (
+                    <span
+                      key={h.label}
+                      onClick={h.key ? () => setCompSort(prev => ({
+                        key: h.key,
+                        dir: prev.key === h.key && prev.dir === "desc" ? "asc" : "desc"
+                      })) : undefined}
+                      style={{
+                        fontSize: 10, color: compSort.key === h.key ? C.accent : C.muted,
+                        textTransform: "uppercase", letterSpacing: 1,
+                        cursor: h.key ? "pointer" : "default",
+                        userSelect: "none",
+                        display: "flex", alignItems: "center", gap: 3,
+                      }}
+                    >
+                      {h.label}
+                      {h.key && compSort.key === h.key && (
+                        <span style={{ fontSize: 9 }}>{compSort.dir === "desc" ? "▼" : "▲"}</span>
+                      )}
+                      {h.key && compSort.key !== h.key && (
+                        <span style={{ fontSize: 9, opacity: 0.3 }}>⇅</span>
+                      )}
+                    </span>
                   ))}
                 </div>
                 <div style={{ maxHeight: 400, overflowY: "auto" }}>
-                  {competitors.map((c, i) => (
+                  {(() => {
+                    // Sort competitors: your listing always pinned at top, rest sorted by selected column
+                    const you = competitors.filter(c => c.isYou);
+                    const others = competitors.filter(c => !c.isYou);
+                    const sorted = [...others].sort((a, b) => {
+                      const aVal = a[compSort.key] || 0;
+                      const bVal = b[compSort.key] || 0;
+                      return compSort.dir === "desc" ? bVal - aVal : aVal - bVal;
+                    });
+                    return [...you, ...sorted];
+                  })().map((c, i) => (
                     <CompetitorRow key={c.listing_id || i} c={c} yourOcc={overview.occupancyRate || 0} yourRate={yourNightlyRate} database={database} yourAmenities={yourAmenities} />
                   ))}
                 </div>
