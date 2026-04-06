@@ -1,13 +1,13 @@
 {
   "property": "Georgia's Place",
-  "occupancyRate": 29,
-  "bookedNights": 9,
-  "totalNights": 31,
-  "avgNightlyRate": 102,
-  "totalRevenue": 920.71,
-  "projectedRevenue": 920.71,
+  "occupancyRate": 67,
+  "bookedNights": 20,
+  "totalNights": 30,
+  "avgNightlyRate": 103,
+  "totalRevenue": 2065.6,
+  "projectedRevenue": 2065.6,
   "rating": 5.0,
-  "totalReviews": 2,
+  "totalReviews": 3,
   "responseRate": 0,
   "bookings": [
     {
@@ -15,52 +15,72 @@
       "year_month": "2026-03",
       "bookings": 9,
       "revenue": 920.71
+    },
+    {
+      "month": "Apr",
+      "year_month": "2026-04",
+      "bookings": 20,
+      "revenue": 2065.6
     }
   ],
   "reviews": [
     {
-      "author": "Andi",
+      "author": "5 stars, 100% of reviews",
       "rating": 5,
-      "date": "Clovis, California",
-      "comment": "Rating, 5 stars , \u00b7 Today , \u00b7 Stayed with kids This was a beautiful home and a nice quiet area was exactly as described. The host did a wonderful job of adding small luxuries making sure that everythi"
+      "date": "5",
+      "comment": "5"
     },
     {
-      "author": "Durwood",
+      "author": "4 stars, 0% of reviews",
       "rating": 5,
-      "date": "New Smyrna Beach, Florida",
-      "comment": "Rating, 5 stars , \u00b7 2 weeks ago , \u00b7 Stayed a few nights Great place to stay. Quiet neighborhood. Close to grocery stores, Walmart, etc. Would stay again. Show more"
+      "date": "4",
+      "comment": "4"
+    },
+    {
+      "author": "3 stars, 0% of reviews",
+      "rating": 5,
+      "date": "3",
+      "comment": "3"
+    },
+    {
+      "author": "2 stars, 0% of reviews",
+      "rating": 5,
+      "date": "2",
+      "comment": "2"
     }
   ],
   "calendar": {
-    "month": "March 2026",
+    "month": "April 2026",
     "booked": [
-      12,
-      13,
-      14,
-      16,
-      17,
-      18,
-      19,
-      27,
-      28
-    ],
-    "blocked": [
+      3,
+      5,
       6,
       7,
       8,
       9,
-      10,
-      11,
+      12,
+      13,
+      14,
       15,
+      16,
+      17,
+      18,
+      19,
       20,
       21,
       22,
       23,
+      25,
+      26
+    ],
+    "blocked": [
+      1,
+      2,
+      4,
+      10,
+      11,
       24,
-      26,
-      29,
-      30,
-      31
+      27
     ]
   },
   "amenities": [
