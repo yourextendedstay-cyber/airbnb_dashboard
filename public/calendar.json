@@ -95,10 +95,17 @@
       "status": "Booked"
     },
     {
-      "record_id": 14,
+      "record_id": 15,
       "check-in": "2026-08-07",
       "check-out": "2026-08-10",
       "host_payout": 313.88,
+      "status": "Booked"
+    },
+    {
+      "record_id": 16,
+      "check-in": "2026-07-29",
+      "check-out": "2026-08-03",
+      "host_payout": 528.09,
       "status": "Booked"
     }
   ]
