@@ -1,0 +1,147 @@
+{
+  "property": "Georgia's Place",
+  "occupancyRate": 61,
+  "bookedNights": 19,
+  "totalNights": 31,
+  "avgNightlyRate": 109,
+  "totalRevenue": 2075.36,
+  "projectedRevenue": 2075.36,
+  "rating": 5.0,
+  "totalReviews": 6,
+  "responseRate": 0,
+  "bookings": [
+    {
+      "month": "Mar",
+      "year_month": "2026-03",
+      "bookings": 9,
+      "revenue": 920.71
+    },
+    {
+      "month": "Apr",
+      "year_month": "2026-04",
+      "bookings": 20,
+      "revenue": 2065.6
+    },
+    {
+      "month": "May",
+      "year_month": "2026-05",
+      "bookings": 19,
+      "revenue": 2075.36
+    }
+  ],
+  "reviews": [
+    {
+      "author": "5 stars, 100% of reviews",
+      "rating": 5,
+      "date": "5",
+      "comment": "5"
+    },
+    {
+      "author": "4 stars, 0% of reviews",
+      "rating": 5,
+      "date": "4",
+      "comment": "4"
+    },
+    {
+      "author": "3 stars, 0% of reviews",
+      "rating": 5,
+      "date": "3",
+      "comment": "3"
+    },
+    {
+      "author": "2 stars, 0% of reviews",
+      "rating": 5,
+      "date": "2",
+      "comment": "2"
+    }
+  ],
+  "calendar": {
+    "month": "May 2026",
+    "booked": [
+      2,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      27,
+      28,
+      29,
+      30
+    ],
+    "blocked": [
+      1,
+      4,
+      5,
+      6,
+      12,
+      18,
+      22,
+      26,
+      31
+    ]
+  },
+  "amenities": [
+    "Bathtub",
+    "Hair dryer",
+    "Cleaning products",
+    "Shampoo",
+    "Conditioner",
+    "Body soap",
+    "Hot water",
+    "Shower gel",
+    "Free washer \u2013 In building",
+    "Free dryer \u2013 In building",
+    "Essentials\nTowels, bed sheets, soap, and toilet paper",
+    "Hangers",
+    "Bed linens",
+    "Extra pillows and blankets",
+    "Clothing storage: walk-in closet, closet, and dresser",
+    "70 inch HDTV with Disney+, Netflix, Hulu",
+    "Bluetooth sound system",
+    "Books and reading material",
+    "Pack \u2019n play/Travel crib - always at the listing",
+    "Standalone high chair - always at the listing\nWith straps/harness and food tray",
+    "Board games",
+    "Baby safety gates",
+    "Central air conditioning",
+    "Ceiling fan",
+    "Central heating",
+    "Smoke alarm",
+    "Wifi",
+    "Kitchen\nSpace where guests can cook their own meals",
+    "Refrigerator",
+    "Microwave",
+    "Cooking basics\nPots and pans, oil, salt and pepper",
+    "Dishes and silverware\nBowls, chopsticks, plates, cups, etc.",
+    "Freezer",
+    "Dishwasher",
+    "Whirlpool stainless steel gas stove",
+    "Stainless steel double oven",
+    "Hot water kettle",
+    "Coffee maker: drip coffee maker, Keurig coffee machine",
+    "Wine glasses",
+    "Toaster",
+    "Baking sheet",
+    "Blender",
+    "Dining table",
+    "Coffee",
+    "Private patio or balcony",
+    "Outdoor furniture",
+    "Outdoor dining area",
+    "Free driveway parking on premises \u2013 3 spaces",
+    "Free street parking",
+    "Long term stays allowed\nAllow stay for 28 days or more",
+    "Self check-in",
+    "Smart lock"
+  ]
+}
