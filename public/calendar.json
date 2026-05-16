@@ -1,0 +1,178 @@
+
+{
+  "blocked_dates": [
+    "2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11",
+    "2026-03-15","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24",
+    "2026-03-26","2026-03-29","2026-03-30","2026-03-31","2026-04-01","2026-04-02",
+    "2026-04-04","2026-04-10","2026-04-11","2026-04-24","2026-04-27","2026-04-28",
+    "2026-04-29","2026-04-30","2026-05-01","2026-05-04","2026-05-05","2026-05-06",
+    "2026-05-12","2026-05-18","2026-05-22","2026-05-26","2026-05-31","2026-06-04",
+    "2026-06-08","2026-06-09","2026-06-12","2026-06-16","2026-06-21","2026-06-22",
+    "2026-06-23","2026-06-28","2026-07-04","2026-07-09","2026-07-16","2026-07-19",
+    "2026-07-28","2026-08-03","2026-08-06","2026-08-10","2026-08-27","2026-08-30",
+    "2026-09-02","2026-09-06"
+  ],
+  "records": [
+    {
+      "record_id": 2,
+      "check-in": "2026-06-17",
+      "check-out": "2026-06-21",
+      "host_payout": 507.00,
+      "status": "Booked"
+    },
+    {
+      "record_id": 3,
+      "check-in": "2026-03-12",
+      "check-out": "2026-03-15",
+      "host_payout": 388.70,
+      "status": "Booked"
+    },
+    {
+      "record_id": 4,
+      "check-in": "2026-03-27",
+      "check-out": "2026-03-29",
+      "host_payout": 182.52,
+      "status": "Booked"
+    },
+    {
+      "record_id": 5,
+      "check-in": "2026-04-05",
+      "check-out": "2026-04-10",
+      "host_payout": 589.39,
+      "status": "Booked"
+    },
+    {
+      "record_id": 6,
+      "check-in": "2026-04-25",
+      "check-out": "2026-04-27",
+      "host_payout": 250.12,
+      "status": "Booked"
+    },
+    {
+      "record_id": 7,
+      "check-in": "2026-06-01",
+      "check-out": "2026-06-04",
+      "host_payout": 341.17,
+      "status": "Booked"
+    },
+    {
+      "record_id": 8,
+      "check-in": "2026-07-17",
+      "check-out": "2026-07-19",
+      "host_payout": 277.16,
+      "status": "Booked"
+    },
+    {
+      "record_id": 9,
+      "check-in": "2026-03-16",
+      "check-out": "2026-03-20",
+      "host_payout": 349.49,
+      "status": "Booked"
+    },
+    {
+      "record_id": 10,
+      "check-in": "2026-05-13",
+      "check-out": "2026-05-18",
+      "host_payout": 502.94,
+      "status": "Booked"
+    },
+    {
+      "record_id": 11,
+      "check-in": "2026-05-19",
+      "check-out": "2026-05-22",
+      "host_payout": 288.99,
+      "status": "Booked"
+    },
+    {
+      "record_id": 12,
+      "check-in": "2026-04-03",
+      "check-out": "2026-04-04",
+      "host_payout": 92.95,
+      "status": "Booked"
+    },
+    {
+      "record_id": 13,
+      "check-in": "2026-04-12",
+      "check-out": "2026-04-24",
+      "host_payout": 1133.14,
+      "status": "Booked"
+    },
+    {
+      "record_id": 15,
+      "check-in": "2026-08-07",
+      "check-out": "2026-08-10",
+      "host_payout": 313.88,
+      "status": "Booked"
+    },
+    {
+      "record_id": 16,
+      "check-in": "2026-07-29",
+      "check-out": "2026-08-03",
+      "host_payout": 528.09,
+      "status": "Booked"
+    },
+    {
+      "record_id": 18,
+      "check-in": "2026-05-02",
+      "check-out": "2026-05-04",
+      "host_payout": 245.05,
+      "status": "Booked"
+    },
+    {
+      "record_id": 19,
+      "check-in": "2026-06-05",
+      "check-out": "2026-06-08",
+      "host_payout": 349.20,
+      "status": "Booked"
+    },
+    {
+      "record_id": 20,
+      "check-in": "2026-05-07",
+      "check-out": "2026-05-12",
+      "host_payout": 569.74,
+      "status": "Booked"
+    },
+    {
+      "record_id": 21,
+      "check-in": "2026-07-05",
+      "check-out": "2026-07-09",
+      "host_payout": 461.49,
+      "status": "Booked"
+    },
+    {
+      "record_id": 22,
+      "check-in": "2026-05-27",
+      "check-out": "2026-05-31",
+      "host_payout": 468.64,
+      "status": "Booked"
+    },
+    {
+      "record_id": 23,
+      "check-in": "2026-06-24",
+      "check-out": "2026-06-28",
+      "host_payout": 460.69,
+      "status": "Booked"
+    },
+    {
+      "record_id": 24,
+      "check-in": "2026-08-28",
+      "check-out": "2026-08-30",
+      "host_payout": 261.95,
+      "status": "Booked"
+    },
+    {
+      "record_id": 25,
+      "check-in": "2026-06-10",
+      "check-out": "2026-06-12",
+      "host_payout": 228.99,
+      "status": "Booked"
+    },
+    {
+      "record_id": 26,
+      "check-in": "2026-09-03",
+      "check-out": "2026-09-06",
+      "host_payout": 373.28,
+      "status": "Booked"
+    }
+  ]
+}
